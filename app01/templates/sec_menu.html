@@ -25,14 +25,52 @@
             width: 400px;
             height: 400px;
         }
+
+        .sider {
+            min-height: calc(100vh - 60px);
+            background: #ffffff;
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            padding: 0;
+            width: 257px;
+
+
+            border-right: 2px solid #e3e3e3;
+            border-bottom: 2px solid #e3e3e3;
+        }
+
+        .nav-item {
+            border-bottom: 2px solid #e3e3e3;
+            margin-top: 50px;
+        }
+
+        .text-white {
+            color: #fff !important;
+        }
 	</style>
-	<div class="list-group" style="float: right; width: 300px">
-		<a href="/meun/main/add/" class="list-group-item list-group-item-success">Create recipe</a>
-		<a href="#" class="list-group-item list-group-item-info">*********</a>
-		<a href="#" class="list-group-item list-group-item-warning">*********</a>
-		<a href="#" class="list-group-item list-group-item-danger">*********</a>
+	<div class="sider" style="float: left;">
+		<ul class="nav">
+			<li class="nav-item" style="margin-top: 1px">
+				<a style="background-color:#000; " href="/main/"
+				   class="list-group-item list-group-item-warning"><h3 class="text-white">Home</h3></a>
+			</li>
+			<li class="nav-item">
+				<a style="background-color: #ff5916 !important; " href="/main1/"
+				   class="list-group-item list-group-item-warning">
+					<h3 class="text-white">My own recipes</h3></a>
+			</li>
+			<li class="nav-item">
+				<a style="background-color: #44c553 !important; " href="/meun/main/add/"
+				   class="list-group-item list-group-item-success"><h3 class="text-white">Create recipe</h3></a>
+			</li>
+			<li class="nav-item">
+				<a style="background-color: #7832e2 !important; " href="/meun/main/add1/"
+				   class="list-group-item list-group-item-info"><h3 class="text-white">Customize recipe</h3></a>
+			</li>
+
+		</ul>
 	</div>
-	<div class="container">
+	<div class="container" style=" margin-top: -20px">
 		<div class="row">
 			<div class="col-md-9">
 
@@ -40,11 +78,15 @@
 					<div class="alert alert-success"><h2>{{ obj.name }} </h2>
 					</div>
 					<div>
-						<h3>Serving size: For {{ tools}} person</h3>
+						<h3>Serving size: For {{ tools }} person</h3>
 						<form action="/meun/{{ obj.id }}/det/" method="POST">
-							<h3>Bigger size: <input  type="text" name="tools" style="width: 100px;  border: 2px solid skyblue" value=""></h3>
+							<h3>Bigger size: <input type="text" name="tools"
+							                        style="width: 100px; margin-left: 30px; border: 2px solid skyblue" value=""></h3>
 							{% csrf_token %}
-							<a href="#"><input style="float: right; width: 100px; margin-top: -43px; margin-right: 500px" id = 'textUser' class="btn btn-success" role="button" type="submit" value="Start!"/></a>
+							<a href="#"><input
+									style="float: right; width: 100px; margin-top: -43px; margin-right: 300px"
+									id='textUser' class="btn btn-success" role="button" type="submit"
+									value="Start!"/></a>
 						</form>
 					</div>
 					<div class="one">
@@ -61,8 +103,12 @@
 					<fieldset class="particulars">
 						<legend style="color: saddlebrown">Ingredients</legend>
 						<h3>{{ obj.meat }}*{{ tools }}</h3>
+						<h3>{{ obj.meat1 }}*{{ tools }}</h3>
 						<h3>{{ obj.veg }}*{{ tools }}</h3>
+						<h3>{{ obj.veg1 }}*{{ tools }}</h3>
 						<h3>{{ obj.auxiliary }}*{{ tools }}</h3>
+						<h3>{{ obj.auxiliary1 }}*{{ tools }}</h3>
+						<h3>{{ obj.auxiliary2 }}*{{ tools }}</h3>
 					</fieldset>
 					<fieldset class="particulars">
 						<legend style="color: saddlebrown">Temperature</legend>
@@ -86,7 +132,18 @@
 					<fieldset class="particulars">
 						<legend style="color: saddlebrown"><h3>Recommendation Rate</h3></legend>
 						<div class="two">
-							<h3>{{ obj.rate }} stars</h3>
+							{% if obj.rate == 1 %}
+
+								<h3>★✩✩✩✩</h3>
+							{% elif obj.rate == 2 %}
+								<h3>★★✩✩✩</h3>
+							{% elif obj.rate == 3 %}
+								<h3>★★★✩✩</h3>
+							{% elif obj.rate == 4 %}
+								<h3>★★★★✩</h3>
+							{% elif obj.rate == 4 %}
+								<h3>★★★★★</h3>
+							{% endif %}
 						</div>
 
 					</fieldset>
@@ -101,16 +158,15 @@
 
 			</div>
 		</div>
+		<a href="/main/">
+			<h3>
+
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="glyphicon-class"></span>
+
+				Back
+			</h3>
+		</a>
 	</div>
 {% endblock %}
-{#<script>#}
-{##}
-{#	function getInfo(){#}
-{#		//1.获取用户名和密码的值#}
-{#		var username1 = $("#textUser").val();#}
-{##}
-{##}
-{#		$("#view").append(newli)#}
-{#	}#}
-{##}
-{#</script>#}
+

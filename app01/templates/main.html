@@ -61,7 +61,7 @@
 
         .carousel-inner {
             height: 200px;
-            width: 900px;
+            width: 1170px;
         }
 
         .four4 a {
@@ -112,7 +112,7 @@
 
         .bs-example {
             width: 1170px;
-            margin-left: 0px;
+            margin-left: 0;
 
         }
 
@@ -152,7 +152,8 @@
 				   class="list-group-item list-group-item-warning"><h3 class="text-white">Home</h3></a>
 			</li>
 			<li class="nav-item">
-				<a style="background-color: #ff5916 !important; " href="/main1/" class="list-group-item list-group-item-warning">
+				<a style="background-color: #ff5916 !important; " href="/main1/"
+				   class="list-group-item list-group-item-warning">
 					<h3 class="text-white">My own recipes</h3></a>
 			</li>
 			<li class="nav-item">
@@ -163,32 +164,27 @@
 				<a style="background-color: #7832e2 !important; " href="/meun/main/add1/"
 				   class="list-group-item list-group-item-info"><h3 class="text-white">Customize recipe</h3></a>
 			</li>
-			<li class="nav-item">
-				<a style="background-color: #35bdff !important; " href="/meun/main/add/"
-				   class="list-group-item list-group-item-danger"><h3 class="text-white">Share recipes</h3></a>
-			</li>
-
-			<li class="nav-item active">
-				<a style="background-color: #ffde03 !important;" href="/meun/main/add/"
-				   class="list-group-item list-group-item-primary"><h3 class="text-white">***</h3></a>
-			</li>
 
 		</ul>
 	</div>
 
+
+
+
+	<div class="container" style="margin-right: 0; margin-top: -20px; background-color: #f3f3f3">
 		<div class="w clear">
-			<div id="carousel-example-generic" style="width: 900px; height: 500px;margin-left: -20px" class="carousel slide"
+			<div id="carousel-example-generic" style="width: 1170px; height: 500px;" class="carousel slide"
 			     data-ride="carousel">
 				<ol class="carousel-indicators">
 					<li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>
 					<li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
 					<li data-target="#carousel-example-generic" data-slide-to="2" class="active"></li>
 				</ol>
-				<div class="carousel-inner" style="width: 900px; height: 500px;" role="listbox">
-					<div style="width: 1000px; height: 500px;" class="item">
+				<div class="carousel-inner" style="width: 1170px; height: 500px;" role="listbox">
+					<div style="width: 1170px; height: 500px;" class="item">
 						<a href="/det_lun1/">
-							<img style="width: 1000px; height: 500px;"
-							     data-src="holder.js/900x500/auto/#777:#555/text:First slide"
+							<img style="width: 1170px; height: 500px;"
+							     data-src="holder.js/1000x500/auto/#777:#555/text:First slide"
 							     alt="First slide [1000x500]"
 							     src="{% static 'img/gheymeh.jpeg' %}"
 							     data-holder-rendered="true">
@@ -196,7 +192,7 @@
 					</div>
 					<div class="item active left">
 						<a href="/det_lun2/">
-							<img style="width: 1000px; height: 500px;"
+							<img style="width: 1170px; height: 500px;"
 							     data-src="holder.js/900x500/auto/#666:#444/text:Second slide"
 							     alt="Second slide [1000x500]"
 							     src="{% static 'img/chicken-gyoza.jpeg' %}"
@@ -205,8 +201,8 @@
 					</div>
 					<div class="item next left">
 						<a href="/det_lun3/">
-							<img style="width: 1000px; height: 500px;"
-							     data-src="holder.js/900x500/auto/#555:#333/text:Third slide"
+							<img style="width: 1170px; height: 500px;"
+							     data-src="holder.js/1000x500/auto/#555:#333/text:Third slide"
 							     alt="Third slide [1000x500]"
 							     src="{% static 'img/Quesadilla.jpeg' %}"
 							     data-holder-rendered="true">
@@ -289,7 +285,8 @@
 				<a href="/subpage13/" target="_blank" class="btn btn-danger"><h5>Snack</h5></a>
 				<a href="/subpage5/" target="_blank" class="btn btn-warning"><h5>Fast Food</h5></a>
 				<a href="/subpage14/" target="_blank" class="btn btn-success"><h5>Western Food</h5></a>
-				<a href="/category/list/" target="_blank" class="btn btn-info"><h5>All Categories</h5></a>
+
+				{#				<a href="/category/list/" target="_blank" class="btn btn-info"><h5>All Categories</h5></a>#}
 			</div>
 		</div>
 
@@ -318,13 +315,28 @@
 									</span>
 									<h2>{{ obj.name }}</h2>
 									<h5>Category: {{ obj.get_cate_display }}</h5>
-									<h5>Description: {{ obj.description }}</h5>
-									<h5>Comment: {{ obj.get_rate_display }}</h5>
+{#									<h5>Description: {{ obj.description }}</h5>#}
+									<span>
+										<h5>Mark:
+											{% if obj.rate == 1 %}
+												<h5 >★✩✩✩✩</h5>
+											{% elif obj.rate == 2 %}
+												<h5>★★✩✩✩</h5>
+											{% elif obj.rate == 3 %}
+												<h5>★★★✩✩</h5>
+											{% elif obj.rate == 4 %}
+												<h5>★★★★✩</h5>
+											{% elif obj.rate == 5 %}
+												<h5>★★★★★</h5>
+											{% endif %}
+										</h5>
+
+
+
+									</span>
 									<h5>Calories: {{ obj.calories }} kal</h5>
-
-
-									<div style="float: right; margin-top: -50px">
-										<form action="/meun/{{ obj.id }}/det/" method="POST">
+									<div style="float: right; margin-top: -70px">
+										<form action="/meun/{{ obj.id }}/det/" method="POST" style="margin-top: -20px">
 											{% csrf_token %}
 											<p>Quantity: <input type="text" name="tools"
 											                    style="width: 40px; border: 2px solid greenyellow"

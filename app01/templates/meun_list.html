@@ -45,15 +45,31 @@
 					<td><h4>{{ obj.name }}</h4></td>
 
 					<td><h4>{{ obj.description }}</h4></td>
-					<td><h4>{{ obj.get_rate_display }}</h4></td>
+					<td><span>
+
+						{% if obj.rate == 1 %}
+							<h5>★✩✩✩✩</h5>
+						{% elif obj.rate == 2 %}
+							<h5>★★✩✩✩</h5>
+						{% elif obj.rate == 3 %}
+							<h5>★★★✩✩</h5>
+						{% elif obj.rate == 4 %}
+							<h5>★★★★✩</h5>
+						{% elif obj.rate == 5 %}
+							<h5>★★★★★</h5>
+						{% endif %}
+
+					</td>
 					<td><h4>{{ obj.calories }}</h4></td>
 					<td>
-						<form style="padding-top: 4px;" action="/meun/{{ obj.id }}/list2/" method="POST">
+						<form style="padding-top: 2px;" action="/meun/{{ obj.id }}/list2/" method="POST">
 							{% csrf_token %}
 							Quantity:
-							<input  type="text" name="tools" style="width:80px; height: 34px ; border: 3px solid skyblue" value="{{ obj.quan }}">
-							<input class="btn btn-success" style="width: 80px" role="button" type="submit" value="Start"/>
-							<a class="btn btn-danger" style="width: 80px" href="/meun/{{ obj.id }}/delete/">Remove</a>
+							<input type="text" name="tools" style="width:80px; height: 34px ; border: 3px solid skyblue"
+							       value="{{ obj.quan }}">
+							<input class="btn btn-success" style="width: 80px; margin-left:60px;margin-top:10px;padding-top: 10px" role="button" type="submit"
+							       value="Start"/>
+							<a class="btn btn-danger" style="width: 80px;  margin-left:60px; padding-top: 11px" href="/meun/{{ obj.id }}/delete/">Remove</a>
 						</form>
 					</td>
 				</tr>
@@ -63,6 +79,15 @@
 		<ul class="pagination">
 			{{ page_string }}
 		</ul>
+		<a href="/main/">
+			<h3>
+
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="glyphicon-class"></span>
+
+				Back
+			</h3>
+		</a>
 
 
 	</div>

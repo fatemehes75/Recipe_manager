@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from app01.views import admin, account, main, subpage1, lun, Ingre, home, category, favorite
+from app01.views import admin, account, main, subpage1, lun, Ingre, home, category, favorite, mail
 from django.urls import path, re_path
 from django.views.static import serve
 from django.conf import settings
@@ -18,7 +18,9 @@ urlpatterns = [
     # home pages
     path('meun/<int:nid>/det/', home.meun_list),
     path('meun/<int:nid>/det1/', home.meun_list1),
-    # path('meun/det1/', home.meun_list_cal),
+    path('meun/<int:nid>/det2/', home.meun_list2),
+
+
 
 
     # Second menu
@@ -53,13 +55,20 @@ urlpatterns = [
     path('subpage14/', subpage1.page14),
 
 
+
     # Ingredient
     path('Ingredientm/', Ingre.meat),
     path('Ingredientm/add/', Ingre.madd),
+    path('Ingredientm/add1/', Ingre.madd1),
+
     path('Ingredientv/', Ingre.veg),
     path('Ingredientv/add/', Ingre.vadd),
+    path('Ingredientv/add1/', Ingre.vadd1),
+
     path('Ingredienta/', Ingre.aux),
     path('Ingredienta/add/', Ingre.aadd),
+    path('Ingredienta/add1/', Ingre.aadd1),
+    path('Ingredienta/add2/', Ingre.aadd2),
 
 
     # Category
@@ -86,6 +95,12 @@ urlpatterns = [
     path('register/', account.regist),
 
     # personal profile
-    path('person/list', account.person)
+    path('person/list/', account.person),
+    path('person/add/', account.person_add),
+    path('person/<int:nid>/edit/', account.person_edit),
+
+    # Email
+    path('mail/', mail.mail_page),
+    path('mail/send/', mail.sendmail),
 
 ]

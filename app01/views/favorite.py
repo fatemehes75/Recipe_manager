@@ -1,9 +1,8 @@
 from django.http import HttpResponseRedirect
 
-from app01.utils.bootstrap import BootStrapModelForm
+
 from app01.utils.pagination import Pagination
-import tkinter.messagebox
-from tkinter import *
+
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from app01 import models
@@ -21,8 +20,12 @@ def fav_meun(request, nid):
         cate = info.cate
         des = info.description
         meat = info.meat
+        meat1 = info.meat1
         au = info.auxiliary
+        au1 = info.auxiliary1
+        au2 = info.auxiliary2
         veg = info.veg
+        veg1 = info.veg1
         step = info.steps
         rate = info.rate
         cal = info.calories
@@ -35,8 +38,12 @@ def fav_meun(request, nid):
             "cate": cate,
             "description": des,
             "meat": meat,
+            "meat1": meat1,
             "auxiliary": au,
+            "auxiliary1": au1,
+            "auxiliary2": au2,
             "veg": veg,
+            "veg1": veg1,
             "steps": step,
             "rate": rate,
             "calories": cal,
@@ -53,7 +60,6 @@ def fav_meun(request, nid):
 
         queryset2 = models.favorite.objects.all()
 
-        return render(request, 'meun_list.html', {"queryset2": queryset2})
 
 
 def fav_list(request):

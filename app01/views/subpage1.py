@@ -87,3 +87,4 @@ def page14(request):
     """ Western food"""
     queryset = models.home.objects.filter(cate=14)
     return render(request, 'subpage1.html', {"queryset": queryset})
+

@@ -74,23 +74,31 @@ WSGI_APPLICATION = 'Recipemanager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': '{/Users/duanchongyang/Desktop/dcy.db}',
+        'NAME': os.path.join(BASE_DIR, 'dcy1.db'),
+
+    }
+}
+# DATABASES = {
+# 　 ‘default’: {
+# 　 ‘ENGINE’: ‘django.db.backends.sqlite3’,
+# 　 ‘NAME’: os.path.join(BASE_DIR, ‘blogDB.db’),
+# }
+# }
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'NAME': 'main',
+#         'USER': 'root',
+#         'PASSWORD': '888888',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
 #     }
 # }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'food12',
-        'USER': 'root',
-        'PASSWORD': '888888',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -134,3 +142,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = False   # 是否使用TLS安全传输协议
+EMAIL_USE_SSL = True    # 是否使用SSL加密，qq企业邮箱要求使用
+# SMTP地址
+EMAIL_HOST = 'smtp.126.com'
+# SMTP端口
+EMAIL_PORT = 465
+# 自己的邮箱
+EMAIL_HOST_USER = 'jingyumengdcy@126.com'
+# 自己的邮箱授权码，非密码
+EMAIL_HOST_PASSWORD = 'STUAUTWEOFKXBOQX'
+EMAIL_SUBJECT_PREFIX = '[dcy email]'

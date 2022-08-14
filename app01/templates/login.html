@@ -28,10 +28,11 @@
 
 </head>
 <body>
-<div class="account" >
+<div class="account">
 	<h2>User Login</h2>
 	<form method="post" novalidate>
 		{% csrf_token %}
+
 		<div class="form-group">
 			<label>Username</label>
 			{{ form.username }}

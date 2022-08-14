@@ -12,6 +12,35 @@
             height: 530px;
         }
 
+        .iconbox.iconmedium {
+            width: 50px;
+            height: 50px;
+            line-height: 45px;
+            font-size: 1.5rem;
+
+
+        }
+
+        .rounded-circle {
+            border-radius: 70% !important;
+        }
+
+        .fa-google:before {
+            content: "Share";
+
+
+        }
+
+        .iconbox {
+            border: 2px solid;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .text-danger {
+            color: #ff5916 !important;
+        }
+
         .sub-header a {
             float: left;
             width: 100px;
@@ -152,7 +181,8 @@
 				   class="list-group-item list-group-item-warning"><h3 class="text-white">Home</h3></a>
 			</li>
 			<li class="nav-item">
-				<a style="background-color: #ff5916 !important; " href="/main1/" class="list-group-item list-group-item-warning">
+				<a style="background-color: #ff5916 !important; " href="/main1/"
+				   class="list-group-item list-group-item-warning">
 					<h3 class="text-white">My own recipes</h3></a>
 			</li>
 			<li class="nav-item">
@@ -163,15 +193,7 @@
 				<a style="background-color: #7832e2 !important; " href="/meun/main/add1/"
 				   class="list-group-item list-group-item-info"><h3 class="text-white">Customize recipe</h3></a>
 			</li>
-			<li class="nav-item">
-				<a style="background-color: #35bdff !important; " href="/meun/main/add/"
-				   class="list-group-item list-group-item-danger"><h3 class="text-white">Share recipes</h3></a>
-			</li>
 
-			<li class="nav-item active">
-				<a style="background-color: #ffde03 !important;" href="/meun/main/add/"
-				   class="list-group-item list-group-item-primary"><h3 class="text-white">***</h3></a>
-			</li>
 
 		</ul>
 	</div>
@@ -179,12 +201,11 @@
 	<div class="container" style="margin-right: 0; margin-top: -20px; background-color: #f3f3f3">
 		<h1></h1>
 		<div class="panel panel-danger">
-				<div class="panel-heading">
-					<h3 class="panel-title"><h3>My own recipes</h3></h3>
-				</div>
+			<div class="panel-heading">
+				<h3 class="panel-title"><h3>My own recipes</h3></h3>
+			</div>
 
 		</div>
-
 
 
 		<div class="bs-example" data-example-id="thumbnails-with-custom-content">
@@ -193,20 +214,48 @@
 					{% for obj in queryset %}
 						<div class="col-sm-6 col-md-4">
 							<div class="thumbnail">
+
 								<img style="width: 290px ;height:290px" src="/media/{{ obj.img }}"
 								     data-src="holder.js/100%x200" alt="100%x200">
+
+								<a href="/meun/{{ obj.id }}/det2/">
+									<span style="float: right;" class="iconbox iconmedium rounded-circle text-danger">
+										<i class="fab fa-google"></i>
+									</span>
+								</a>
+
+
 								<div class="caption" id="formAdd">
 
 									<h2>{{ obj.name }}</h2>
+
 									<h5>Category: {{ obj.get_cate_display }}</h5>
-									<h5>Description: {{ obj.description }}</h5>
-									<h5>Comment: {{ obj.get_rate_display }}</h5>
+{#									<h5>Description: {{ obj.description }}</h5>#}
+									<span>
+										<h5>Mark:
+											{% if obj.rate == 1 %}
+												<h5>★✩✩✩✩</h5>
+											{% elif obj.rate == 2 %}
+												<h5>★★✩✩✩</h5>
+											{% elif obj.rate == 3 %}
+												<h5>★★★✩✩</h5>
+											{% elif obj.rate == 4 %}
+												<h5>★★★★✩</h5>
+											{% elif obj.rate == 5 %}
+												<h5>★★★★★</h5>
+											{% endif %}
+										</h5>
+
+
+
+									</span>
 									<h5>Calories: {{ obj.calories }} kal</h5>
 
 
-									<div style="float: right; margin-top: -50px">
+									<div style="float: right; margin-top: -70px">
 										<form action="/meun/{{ obj.id }}/det1/" method="POST">
 											{% csrf_token %}
+
 											<p>Quantity: <input type="text" name="toolss"
 											                    style="width: 40px; border: 2px solid greenyellow"
 											                    value="{{ obj.quan }}"></p>

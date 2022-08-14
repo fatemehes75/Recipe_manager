@@ -127,4 +127,55 @@ def logout(request):
 
 
 def person(request):
-    return render(request, 'personal.html')
+    """ User information """
+    queryset = models.Person.objects.all()
+    queryset1 = models.Admin.objects.all()
+    return render(request, 'personal.html', {"queryset": queryset, "queryset1": queryset1})
+
+
+class PersonModelForm(BootStrapModelForm):
+    class Meta:
+        model = models.Person
+        fields = "__all__"
+
+
+
+def person_add(request):
+    """ Add user information """
+
+    title = "Add your personal information"
+    if request.method == 'GET':
+        form = PersonModelForm()
+
+        return render(request, 'upload_form.html', {"form": form, "title": title})
+    form = PersonModelForm(data=request.POST, files=request.FILES)
+    if form.is_valid():
+        form.save()
+        return redirect('/person/list/')
+    return render(request, 'upload_form.html', {"form": form, "title": title})
+
+
+class PersonEditModelForm(BootStrapModelForm):
+    class Meta:
+        model = models.Person
+        fields = "__all__"  #
+        exclude = ["img"]
+
+
+def person_edit(request, nid):
+    """ Edit information """
+    # 对象/None
+    row_object = models.Person.objects.filter(id=nid).first()
+    if not row_object:
+        # return render(request, 'error.html', {"msg": "数据不存在"})
+        return redirect('/person/list/')
+    title = "Edit information"
+    if request.method == 'GET':
+        form = PersonEditModelForm(instance=row_object)  # 默认值
+        return render(request, 'change.html', {"form": form, "title": title})
+    form = PersonEditModelForm(data=request.POST, instance=row_object)
+    if form.is_valid():
+        form.save()
+        return redirect('/person/list/')
+    else:
+        return render(request, 'change.html', {"form": form, "title": title})
