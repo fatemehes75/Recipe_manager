@@ -105,7 +105,6 @@ class vegetable1(models.Model):
     def __str__(self):
         return self.veg1
 
-
 class home(models.Model):
     """ The data in home page"""
 
